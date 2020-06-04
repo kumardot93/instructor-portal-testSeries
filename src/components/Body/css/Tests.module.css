@@ -1,0 +1,32 @@
+.testCont {
+}
+
+.testBtns {
+	height: auto;
+	transition: 0.5s;
+}
+
+.active {
+	/* height: 200%; */
+	transform: scale(1.025);
+	box-shadow: 1px 0 4px black;
+	font-size: x-large;
+}
+
+.description {
+	/* text-align: left; */
+}
+
+.deleteBtn {
+	/* float: right; */
+}
+
+.deleteBtn:hover {
+	text-decoration: none;
+	color: white;
+}
+
+.editBtn:hover {
+	text-decoration: none;
+	color: white;
+}

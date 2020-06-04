@@ -1,0 +1,39 @@
+.sidebar {
+	height: 75vh;
+	width: 15vw;
+	min-width: 80px;
+	border-radius: 6px;
+	box-shadow: 0 0 6px black;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+#sideCont {
+	height: inherit;
+	width: inherit;
+	flex-direction: column;
+}
+
+.mi {
+	font-size: xx-large;
+}
+.btnFont {
+	font-size: x-large;
+}
+
+@media only screen and (max-width: 900px) {
+	.sidebar {
+		height: 100px;
+		width: 100%;
+		overflow-y: hidden;
+		overflow-x: auto;
+	}
+	#sideCont {
+		flex-direction: row;
+	}
+	.mi {
+		/* font-size: large; */
+	}
+	.btnFont {
+		font-size: small;
+	}
+}
