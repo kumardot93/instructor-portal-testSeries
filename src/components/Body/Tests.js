@@ -11,7 +11,11 @@ function newTest(event) {
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
 	ReactDOM.render(
-		<OverlayForm title="New Test" url={window.base + '/material/api/newTest/'} success_url={window.base + '/'} />,
+		<OverlayForm
+			title="New Test"
+			url={window.base + '/material/api/newTest/'}
+			success_url={window.base + '/material/create-test/'}
+		/>,
 		el
 	);
 }
@@ -36,7 +40,10 @@ function Tests(props) {
 								visibility
 							</sub>
 							<span className="float-left ml-2">0</span>
-							<a href="#" className={[ 'material-icons btn p-1', sty.editBtn ].join(' ')}>
+							<a
+								href={window.base + '/material/create-test/' + data.pk}
+								className={[ 'material-icons btn p-1', sty.editBtn ].join(' ')}
+							>
 								edit
 							</a>
 							<a href="#" className={[ 'material-icons btn p-1', sty.deleteBtn ].join(' ')}>
