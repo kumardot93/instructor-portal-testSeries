@@ -5,9 +5,9 @@ import App from './App';
 import Store from './redux/Store.js';
 import { Provider } from 'react-redux';
 
-window.base = 'http://localhost:8000';
+window.base = '';
 window.media_url = window.base + '/media/';
-window.cred = 'include';
+window.cred = 'same-origin';
 
 ReactDOM.render(
 	<React.StrictMode>
