@@ -1,52 +1,48 @@
-//ver0: resolved
-
 import React, { Component } from 'react';
 import CloseOverlay from './../CloseOverlay.js';
 import styles from './css/OverlayForm.module.css';
 
-/*Everything similar to OverlayForm.js 
-submit button text changed to delete*/
+import { connect } from 'react-redux';
 
 class OverlayDeleteForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			form_data: '',
+			data: '',
 			success: 0,
 			spinner: 'spinner-grow',
 			btnSpinner: ''
 		};
-
+	}
+	componentDidMount = () => {
 		fetch(this.props.url, { credentials: window.cred }).then((response) => response.text()).then((data) => {
 			this.setState((state, props) => {
-				return { form_data: data, spinner: '' };
+				return { data: data, spinner: '' };
 			});
 		});
-	}
+	};
 
 	submitHandler = (event) => {
 		event.preventDefault();
-		var form = new FormData(document.querySelector([ '#', styles.form ].join('')));
 		this.setState({ btnSpinner: 'spinner-border spinner-border-sm' });
 		fetch(this.props.url, {
 			method: 'POST',
-			credentials: window.cred,
-			body: form
+			credentials: window.cred
 		})
 			.then((response) => response.text())
 			.then((data) => {
 				if (data.indexOf('success') != -1) {
 					this.setState((state, props) => {
 						return {
-							form_data: data,
+							data: data,
 							success: 1
 						};
 					});
-					this.props.updateBoard();
+					this.props.delete();
 				} else {
 					this.setState((state, props) => {
 						return {
-							form_data: data
+							data: data
 						};
 					});
 				}
@@ -60,8 +56,12 @@ class OverlayDeleteForm extends Component {
 					<i className="material-icons">cancel</i>
 				</button>
 				{this.state.spinner == '' ? (
-					<form onSubmit={this.submitHandler} id={styles.form}>
-						<div dangerouslySetInnerHTML={{ __html: this.state.form_data }} />
+					<React.Fragment>
+						<h1 className="text-center mb-2">{this.props.title}</h1>
+						<h2>{this.props.data}</h2>
+						<h1 className="form-control alert-danger p-2" style={{ height: 'auto' }}>
+							{this.state.data}
+						</h1>
 						{this.state.success == 0 ? (
 							<button
 								style={{ marginTop: '10px' }}
@@ -69,6 +69,7 @@ class OverlayDeleteForm extends Component {
 								id={styles.submit}
 								type="submit"
 								disabled={this.state.btnSpinner != ''}
+								onClick={this.submitHandler}
 							>
 								Delete
 								<span className={this.state.btnSpinner} style={{ marginLeft: '6px' }} />
@@ -76,7 +77,7 @@ class OverlayDeleteForm extends Component {
 						) : (
 							''
 						)}
-					</form>
+					</React.Fragment>
 				) : (
 					<div id={styles.spinnerCont} className="text-dark">
 						<div className={[ 'spinner-grow', styles.spinner ].join(' ')} />

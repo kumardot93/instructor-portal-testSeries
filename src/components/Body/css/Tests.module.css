@@ -30,3 +30,18 @@
 	text-decoration: none;
 	color: white;
 }
+
+.assBtn {
+	font-size: x-large;
+	background: none;
+	border: none;
+}
+
+.assBtn:focus {
+	outline: none;
+}
+
+.assBtn span {
+	position: relative;
+	bottom: 4px;
+}

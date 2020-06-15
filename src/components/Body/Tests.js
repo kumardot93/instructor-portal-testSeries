@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import styles from './css/Main.module.css';
 import sty from './css/Tests.module.css';
 import OverlayForm from './OverlayForm.js';
+import OverlayDeleteTest from './OverlayDeleteForm.js';
+import OverlayTestResponses from './OverlayTestResults.js';
 
 import { connect } from 'react-redux';
+import { deleteTest as dt } from './../../redux/actions/Material.js';
 
 function newTest(event) {
 	event.preventDefault();
@@ -15,6 +18,26 @@ function newTest(event) {
 			title="New Test"
 			url={window.base + '/material/api/newTest/'}
 			success_url={window.base + '/material/create-test/'}
+		/>,
+		el
+	);
+}
+
+function TestResponses(pk) {
+	let el = document.getElementById('overlay');
+	el.style.display = 'block';
+	ReactDOM.render(<OverlayTestResponses pk={pk} />, el);
+}
+
+function deleteTest(pk, test, delMethod) {
+	let el = document.getElementById('overlay');
+	el.style.display = 'block';
+	ReactDOM.render(
+		<OverlayDeleteTest
+			title="Test Delete Form"
+			data={test}
+			url={window.base + '/material/api/test/deleteTest/' + pk + '/'}
+			delete={delMethod}
 		/>,
 		el
 	);
@@ -36,19 +59,30 @@ function Tests(props) {
 					{data.fields.title}
 					{is_active != '' ? (
 						<div className="text-right">
-							<sub className="material-icons float-left" style={{ fontSize: 'x-large' }}>
-								visibility
-							</sub>
-							<span className="float-left ml-2">0</span>
+							<button
+								className={[ 'float-left', sty.assBtn ].join(' ')}
+								onClick={(ev) => TestResponses(data.pk)}
+							>
+								<i className="material-icons">assignment</i>
+								<span className="ml-2">{data.attempts}</span>
+							</button>
+
 							<a
 								href={window.base + '/material/create-test/' + data.pk}
 								className={[ 'material-icons btn p-1', sty.editBtn ].join(' ')}
 							>
 								edit
 							</a>
-							<a href="#" className={[ 'material-icons btn p-1', sty.deleteBtn ].join(' ')}>
+							<button
+								className={[ 'material-icons btn p-1', sty.deleteBtn ].join(' ')}
+								onClick={(ev) =>
+									deleteTest(data.pk, data.fields.title, () => {
+										props.deleteTest(index);
+										updateActive(-1);
+									})}
+							>
 								delete
-							</a>
+							</button>
 						</div>
 					) : (
 						''
@@ -65,15 +99,21 @@ function Tests(props) {
 					add
 				</button>
 			</h1>
-			<div class={[ 'pl-2 pr-2', sty.testsCont ].join(' ')}>{tests}</div>
+			<div className={[ 'pl-2 pr-2', sty.testsCont ].join(' ')}>{tests}</div>
 		</div>
 	);
 }
 
 const mapStateToProps = (state) => {
 	return {
-		tests: state.Material != undefined ? state.Material.tests : []
+		tests: state.Material.tests
 	};
 };
 
-export default connect(mapStateToProps)(Tests);
+const mapDispatchFromProps = (dispatch) => {
+	return {
+		deleteTest: (index) => dispatch(dt(index))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchFromProps)(Tests);

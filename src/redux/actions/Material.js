@@ -4,3 +4,11 @@ export function updateMaterial(data) {
 		payload: data
 	};
 }
+
+export function deleteTest(index) {
+	console.log('delete called');
+	return {
+		type: 'deleteTest',
+		payload: index
+	};
+}
