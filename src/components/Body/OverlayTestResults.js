@@ -52,7 +52,7 @@ class OverlayForm extends Component {
 				{this.state.spinner == '' ? (
 					<React.Fragment>
 						<h1 className="text-center display-4">Test Attempts</h1>
-						<div>{btns}</div>
+						<div className="d-flex flex-column-reverse">{btns}</div>
 					</React.Fragment>
 				) : (
 					<div id={styles.spinnerCont} className="text-dark">
