@@ -6,7 +6,8 @@ import Store from './redux/Store.js';
 import { Provider } from 'react-redux';
 
 window.base = '';
-window.media_url = window.base + '/media/';
+// window.media_url = window.base + '/media/';
+window.media_url = 'https://eduhub.blob.core.windows.net/eduhub/';
 window.cred = 'same-origin';
 
 ReactDOM.render(
