@@ -10,22 +10,22 @@ function UserBtn(props) {
 			<button
 				className="p-0"
 				id={styles.userBtn}
-				onClick={(ev) => changeVis(userPannelVis === 'block' ? 'none' : 'block')}
-				onBlur={(ev) => setTimeout(changeVis, 10, 'none')}
+				onClick={(ev) => changeVis(userPannelVis === 'block' ? 'none' : 'block')} //apear and disapear onClick
+				onBlur={(ev) => setTimeout(changeVis, 10, 'none')} //to make the dropdown disapear afetr user clicks somewhere else
 			>
-				<img
+				<img //DP of user
 					src={props.profile.name !== undefined ? window.media_url + props.profile.fields.profile_pic : ''}
 					id={styles.userBtnImg}
 					alt=""
 				/>
 			</button>
 			<div
-				onClick={(ev) => setTimeout(changeVis, 20, 'block')}
+				onClick={(ev) => setTimeout(changeVis, 15, 'block')} //Don't let dropdown disapear
 				id={styles.userPannel}
 				className="p-2 pr-3 bg-white"
 				style={{ display: userPannelVis }}
 			>
-				{props.profile.name !== undefined ? (
+				{props.profile.name !== undefined ? ( //profile data: username and email of user
 					<React.Fragment>
 						<span className={styles.userData}>{props.profile.username}</span>
 						<span className={[ styles.userData, 'text-secondary' ].join(' ')}>{props.profile.email}</span>
@@ -34,7 +34,7 @@ function UserBtn(props) {
 					''
 				)}
 				<hr className="m-0 mt-1" />
-				<a
+				<a //links profile and logout
 					href="#"
 					className={[ styles.navLink, styles.userPannelLink, 'pb-0 mt-2 mb-1 mr-2 ml-1' ].join(' ')}
 					style={{ opacity: '25%' }}

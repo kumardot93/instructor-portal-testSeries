@@ -5,7 +5,7 @@ import App from './App';
 import Store from './redux/Store.js';
 import { Provider } from 'react-redux';
 
-window.base = 'localhost:8000';
+window.base = 'http://localhost:8000';
 window.media_url = window.base + '/media/';
 // window.media_url = 'https://eduhub.blob.core.windows.net/eduhub/';
 window.cred = 'include';
