@@ -24,7 +24,7 @@ class OverlayForm extends Component {
 
 	render() {
 		let btns;
-		if (this.state.data.length == 0) btns = <h4 className="text-center mt-3">No attempts yet...</h4>;
+		if (this.state.data.length === 0) btns = <h4 className="text-center mt-3">No attempts yet...</h4>;
 		else
 			btns = this.state.data.map((data, index) => {
 				let t = new Date(data.fields.time);
@@ -32,6 +32,7 @@ class OverlayForm extends Component {
 					<a
 						href={window.base + '/material/check-test/' + data.pk}
 						target="_blank"
+						rel="noopener noreferrer"
 						className="btn btn-info form-control mt-1 text-left"
 						style={{ height: 'auto' }}
 					>
@@ -49,7 +50,7 @@ class OverlayForm extends Component {
 				<button id={styles.cross} onClick={(event) => CloseOverlay(event, styles.overlaymain)}>
 					<i className="material-icons">cancel</i>
 				</button>
-				{this.state.spinner == '' ? (
+				{this.state.spinner === '' ? (
 					<React.Fragment>
 						<h1 className="text-center display-4">Test Attempts</h1>
 						<div className="d-flex flex-column-reverse">{btns}</div>

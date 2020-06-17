@@ -3,6 +3,7 @@ import styles from './css/Main.module.css';
 
 function Courses(props) {
 	return (
+		//Yet to work on
 		<div className={[ 'bg-light m-2 mr-3 mb-4', styles.boxes ].join(' ')} style={{ opacity: '35%' }}>
 			<h1 className={[ 'pl-4 bg-dark text-light', styles.heading ].join(' ')}>
 				Courses

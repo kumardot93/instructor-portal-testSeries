@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { deleteTest as dt } from './../../redux/actions/Material.js';
 
 function newTest(event) {
+	//Create new test
 	event.preventDefault();
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
@@ -24,12 +25,14 @@ function newTest(event) {
 }
 
 function TestResponses(pk) {
+	//List of response on a test
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
 	ReactDOM.render(<OverlayTestResponses pk={pk} />, el);
 }
 
 function deleteTest(pk, test, delMethod) {
+	//Delete a test
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
 	ReactDOM.render(
@@ -46,10 +49,10 @@ function deleteTest(pk, test, delMethod) {
 function Tests(props) {
 	const [ active, updateActive ] = useState(-1);
 	let tests = '';
-	if (props.tests != undefined) {
+	if (props.tests !== undefined) {
 		tests = props.tests.map((data, index) => {
-			let is_active = index == active ? sty.active : '';
-			let btnClass = is_active == '' ? 'btn-secondary' : 'btn-info';
+			let is_active = index === active ? sty.active : ''; //style if active from use state is == index of data
+			let btnClass = is_active === '' ? 'btn-secondary' : 'btn-info';
 			return (
 				<button
 					onClick={() => updateActive(index)}
@@ -57,7 +60,7 @@ function Tests(props) {
 					className={[ 'btn form-control mb-1', sty.testBtns, is_active, btnClass ].join(' ')}
 				>
 					{data.fields.title}
-					{is_active != '' ? (
+					{is_active !== '' ? (
 						<div className="text-right">
 							<button
 								className={[ 'float-left', sty.assBtn ].join(' ')}
@@ -68,7 +71,7 @@ function Tests(props) {
 							</button>
 
 							<a
-								href={window.base + '/material/create-test/' + data.pk}
+								href={window.base + '/material/create-test/' + data.pk} //Link to create test
 								className={[ 'material-icons btn p-1', sty.editBtn ].join(' ')}
 							>
 								edit
@@ -77,6 +80,7 @@ function Tests(props) {
 								className={[ 'material-icons btn p-1', sty.deleteBtn ].join(' ')}
 								onClick={(ev) =>
 									deleteTest(data.pk, data.fields.title, () => {
+										//pasing a function to run when delete is successfull
 										props.deleteTest(index);
 										updateActive(-1);
 									})}

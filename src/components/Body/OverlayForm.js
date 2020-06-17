@@ -71,17 +71,17 @@ class OverlayForm extends Component {
 				<button id={styles.cross} onClick={(event) => CloseOverlay(event, styles.overlaymain)}>
 					<i className="material-icons">cancel</i>
 				</button>
-				{this.state.spinner == '' ? (
+				{this.state.spinner === '' ? (
 					<React.Fragment>
 						<h1 className="text-center display-4">{this.props.title}</h1>
-						{this.state.success != 0 ? (
+						{this.state.success !== 0 ? (
 							<label className="alert-success form-control" style={{ width: '95%', height: 'auto' }}>
 								New Test created successfully. You will be redirected to test dashboard shortly...
 							</label>
 						) : (
 							''
 						)}
-						{this.state.error_msg == null ? (
+						{this.state.error_msg === null ? (
 							''
 						) : (
 							<label className="alert-danger form-control" style={{ width: '95%', height: 'auto' }}>
@@ -90,26 +90,26 @@ class OverlayForm extends Component {
 						)}
 						<form onSubmit={this.submitHandler} id={styles.form} className={styles.form}>
 							<fieldset dangerouslySetInnerHTML={{ __html: this.state.form_data }} />
-							<fieldset disabled={this.state.btnSpinner != '' || this.state.success == 1}>
+							<fieldset disabled={this.state.btnSpinner !== '' || this.state.success === 1}>
 								<label>Title:</label>
 								<input className="form-control" name="title" type="text" required />
 								<label className="mt-2">Description:</label>
 								<textarea className="form-control" rows="7" name="description" required />
 							</fieldset>
 							<p className="m-2">You can always edit these fields later</p>
-							{this.state.success == 0 ? (
+							{this.state.success === 0 ? (
 								<button
 									className="btn btn-primary"
 									id={styles.submit}
 									type="submit"
-									disabled={this.state.btnSpinner != ''}
+									disabled={this.state.btnSpinner !== ''}
 								>
 									submit
 									<span
 										className={this.state.btnSpinner}
 										style={{
 											marginLeft: '6px',
-											display: this.state.btnSpinner == '' ? 'none' : 'inline-block'
+											display: this.state.btnSpinner === '' ? 'none' : 'inline-block'
 										}}
 									/>
 								</button>

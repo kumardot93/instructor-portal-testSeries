@@ -9,10 +9,7 @@ import { connect } from 'react-redux';
 import { updateMaterial } from './../../redux/actions/Material.js';
 
 class Main extends Component {
-	constructor(props) {
-		super(props);
-	}
-
+	//Fetching Dashboard data
 	componentDidMount = () => {
 		fetch(window.base + '/material/api/instructor-dashboard-data/', { credentials: window.cred })
 			.then((response) => response.json())
