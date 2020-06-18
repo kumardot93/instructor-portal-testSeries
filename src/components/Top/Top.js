@@ -9,7 +9,7 @@ import { updateProfile } from './../../redux/actions/Profile.js';
 
 // Entry point for the top bar
 function Top(props) {
-	//Frtching the user profile data
+	//Fetching the user profile data
 	useEffect(
 		() => {
 			fetch(window.base + '/user/api/profile/', { credentials: window.cred }) //fetching profile data
