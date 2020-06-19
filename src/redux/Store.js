@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import Profile from './reducers/Profile.js';
-import Material from './reducers/Material.js';
+import Tests from './reducers/Tests.js';
 
-const Store = createStore(combineReducers({ Profile, Material }), {});
+const Store = createStore(combineReducers({ Profile, Tests }), {});
 
 export default Store;

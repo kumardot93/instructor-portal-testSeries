@@ -88,6 +88,17 @@ p {
 	width: 100%;
 }
 
+.resLink:nth-of-type(even) {
+	background-color: rgb(20, 100, 0, 0.1);
+}
+.resLink:nth-of-type(odd) {
+	background-color: rgb(20, 100, 0, 0.2);
+}
+
+.resLink:hover {
+	background-color: rgb(20, 100, 0, 0.4);
+}
+
 @media only screen and (max-width: 900px) {
 	#overlaymain {
 		width: 84vw;

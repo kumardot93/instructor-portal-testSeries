@@ -33,7 +33,7 @@ class OverlayForm extends Component {
 						href={window.base + '/material/check-test/' + data.pk}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="btn btn-info form-control mt-1 text-left"
+						className={'btn btn-light form-control mt-1 text-left ' + styles.resLink}
 						style={{ height: 'auto' }}
 					>
 						{data.fields.student}
@@ -54,6 +54,7 @@ class OverlayForm extends Component {
 					<React.Fragment>
 						<h1 className="text-center display-4">Test Attempts</h1>
 						<div className="d-flex flex-column-reverse">{btns}</div>
+						{/* column reverse to show latest first */}
 					</React.Fragment>
 				) : (
 					<div id={styles.spinnerCont} className="text-dark">

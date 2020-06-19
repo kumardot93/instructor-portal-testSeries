@@ -1,12 +1,53 @@
+.testsCont {
+	min-height: 70vh;
+	background-color: white;
+	box-shadow: 0 0 4px grey;
+	margin-left: 1vw;
+	padding-top: 8px;
+	padding-right: 14px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 .testBtns {
 	height: auto;
 	transition: 0.5s;
 }
 
+.testBtns:nth-of-type(even) {
+	background-color: rgba(20, 65, 0, 0.25);
+}
+.testBtns:nth-of-type(odd) {
+	background-color: rgba(20, 65, 0, 0.1);
+}
+.testBtns:hover {
+	box-shadow: 0 0 5px black;
+}
+
 .active {
-	transform: scale(1.025);
+	transform: scaleY(1.025);
 	box-shadow: 1px 0 4px black;
 	font-size: x-large;
+}
+
+.heading {
+	border-radius: 3px;
+}
+
+.addBtn {
+	float: right;
+	font-weight: bold;
+	background-color: transparent;
+	border: none;
+	font-size: xx-large;
+	transition: 0.2s;
+	/* color: cyan; */
+}
+
+.addBtn:hover {
+	transform: scale(1.2);
+	color: lightgreen;
+	text-decoration: none;
 }
 
 .deleteBtn:hover {

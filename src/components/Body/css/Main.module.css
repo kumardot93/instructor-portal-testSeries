@@ -1,45 +1,5 @@
 #main {
-	margin-bottom: 150px;
-}
-.boxes {
-	height: 75vh;
-	width: 25vw;
-	min-width: 200px;
-	border-radius: 6px;
-	box-shadow: 0 0 6px black;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
-#cont {
-	flex-direction: row;
-}
-
-.heading {
-	border-radius: 3px;
-}
-
-.addBtn {
-	float: right;
-	font-weight: bold;
-	background-color: transparent;
-	border: none;
-	font-size: xx-large;
-	transition: 0.2s;
-	color: cyan;
-}
-
-.addBtn:hover {
-	transform: scale(1.2);
-	color: lightgreen;
-	text-decoration: none;
-}
-
-@media only screen and (max-width: 850px) {
-	.boxes {
-		width: 85%;
-	}
-	#cont {
-		flex-direction: column;
-	}
+	margin-bottom: 75px;
+	width: 100%;
+	max-width: 96vw;
 }

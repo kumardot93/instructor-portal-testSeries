@@ -20,7 +20,7 @@ function Top(props) {
 	);
 	return (
 		<div id={styles.topBar} className="d-flex flex-row align-items-center col-12 pl-2  text-light">
-			<h1 className="display-3 ml-2 text-dark" id={styles.edu} onClick={() => window.location.assign('/')}>
+			<h1 className="display-4 ml-2 text-dark" id={styles.edu} onClick={() => window.location.assign('/')}>
 				<span>eduHub</span>
 			</h1>
 			{/* nav will not appear in the mobile view */}

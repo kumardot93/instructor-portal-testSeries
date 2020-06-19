@@ -57,7 +57,13 @@ class OverlayDeleteForm extends Component {
 					<React.Fragment>
 						<h1 className="text-center mb-2">{this.props.title}</h1>
 						<h2>{this.props.data}</h2>
-						<h1 className="form-control alert-danger p-2" style={{ height: 'auto' }}>
+						<h1
+							className={[
+								'form-control p-2',
+								this.state.success === 0 ? 'alert-danger' : 'alert-success'
+							].join(' ')}
+							style={{ height: 'auto' }}
+						>
 							{this.state.data}
 						</h1>
 						{this.state.success === 0 ? (

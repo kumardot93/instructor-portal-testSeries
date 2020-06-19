@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './css/Main.module.css';
-import sty from './css/Tests.module.css';
+import styles from './css/Tests.module.css';
 import OverlayForm from './OverlayForm.js';
 import OverlayDeleteTest from './OverlayDeleteForm.js';
 import OverlayTestResponses from './OverlayTestResults.js';
 
 import { connect } from 'react-redux';
-import { deleteTest as dt } from './../../redux/actions/Material.js';
+import { deleteTest as dt } from '../../redux/actions/Tests.js';
 
 function newTest(event) {
 	//Create new test
@@ -48,69 +47,73 @@ function deleteTest(pk, test, delMethod) {
 
 function Tests(props) {
 	const [ active, updateActive ] = useState(-1);
-	let tests = '';
-	if (props.tests !== undefined) {
-		tests = props.tests.map((data, index) => {
-			let is_active = index === active ? sty.active : ''; //style if active from use state is == index of data
-			let btnClass = is_active === '' ? 'btn-secondary' : 'btn-info';
-			return (
-				<button
-					onClick={() => updateActive(index)}
-					key={index}
-					className={[ 'btn form-control mb-1', sty.testBtns, is_active, btnClass ].join(' ')}
-				>
-					{data.fields.title}
-					{is_active !== '' ? (
-						<div className="text-right">
-							<button
-								className={[ 'float-left', sty.assBtn ].join(' ')}
-								onClick={(ev) => TestResponses(data.pk)}
-							>
-								<i className="material-icons">assignment</i>
-								<span className="ml-2">{data.attempts}</span>
-							</button>
+	let tests;
+	tests = props.tests.tests.map((data, index) => {
+		let is_active = index === active ? styles.active : ''; //style if active from use state is == index of data
 
-							<a
-								href={window.base + '/material/create-test/' + data.pk} //Link to create test
-								className={[ 'material-icons btn p-1', sty.editBtn ].join(' ')}
-							>
-								edit
-							</a>
-							<button
-								className={[ 'material-icons btn p-1', sty.deleteBtn ].join(' ')}
-								onClick={(ev) =>
-									deleteTest(data.pk, data.fields.title, () => {
-										//pasing a function to run when delete is successfull
-										props.deleteTest(index);
-										updateActive(-1);
-									})}
-							>
-								delete
-							</button>
-						</div>
-					) : (
-						''
-					)}
-				</button>
-			);
-		});
-	}
+		return (
+			<button
+				onClick={() => updateActive(index)}
+				key={index}
+				className={[ 'btn form-control mb-1 text-left', styles.testBtns, is_active ].join(' ')}
+				style={{ backgroundColor: is_active === '' ? '' : 'rgba(0, 175, 59, 0.8)' }}
+			>
+				{data.fields.title}
+				{is_active !== '' ? (
+					<div className="text-right">
+						<button
+							className={[ 'float-left', styles.assBtn ].join(' ')}
+							onClick={(ev) => TestResponses(data.pk)}
+						>
+							<i className="material-icons">assignment</i>
+							<span className="ml-2">{data.attempts}</span>
+						</button>
+
+						<a
+							href={window.base + '/material/create-test/' + data.pk} //Link to create test
+							className={[ 'material-icons btn p-1', styles.editBtn ].join(' ')}
+						>
+							edit
+						</a>
+						<button
+							className={[ 'material-icons btn p-1', styles.deleteBtn ].join(' ')}
+							onClick={(ev) =>
+								deleteTest(data.pk, data.fields.title, () => {
+									//pasing a function to run when delete is successfull
+									props.deleteTest(index);
+									updateActive(-1);
+								})}
+						>
+							delete
+						</button>
+					</div>
+				) : (
+					''
+				)}
+			</button>
+		);
+	});
+
 	return (
-		<div className={[ 'bg-light m-2 mr-3 mb-4', styles.boxes ].join(' ')}>
-			<h1 className={[ 'pl-4 bg-dark text-light', styles.heading ].join(' ')}>
+		<React.Fragment>
+			<h1 className={[ 'pl-4 text-dark mt-4 ml-4', styles.heading ].join(' ')}>
 				Tests
-				<button onClick={newTest} className={[ 'material-icons m-2 p-0', styles.addBtn ].join(' ')}>
+				<button
+					onClick={newTest}
+					className={[ 'material-icons m-2 p-0 text-success mr-4 pr-4', styles.addBtn ].join(' ')}
+				>
 					add
 				</button>
 			</h1>
-			<div className={[ 'pl-2 pr-2', sty.testsCont ].join(' ')}>{tests}</div>
-		</div>
+			<hr className="ml-3" />
+			<div className={[ 'ml-2 pr-2 form-control', styles.testsCont ].join(' ')}>{tests}</div>
+		</React.Fragment>
 	);
 }
 
 const mapStateToProps = (state) => {
 	return {
-		tests: state.Material.tests
+		tests: state.Tests
 	};
 };
 
