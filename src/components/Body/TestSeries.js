@@ -6,19 +6,15 @@ import OverlayDeleteTest from './OverlayDeleteForm.js';
 import OverlayTestResponses from './OverlayTestResults.js';
 
 import { connect } from 'react-redux';
-import { deleteTest as dt } from '../../redux/actions/Tests.js';
+import { deleteTestSeries as dt } from '../../redux/actions/TestSeries.js';
 
-function newTest(event) {
+function newTestSeries(event) {
 	//Create new test
 	event.preventDefault();
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
 	ReactDOM.render(
-		<OverlayForm
-			title="New Test"
-			url={window.base + '/material/api/newTest/'}
-			success_url={window.base + '/material/create-test/'}
-		/>,
+		<OverlayForm title="New Test Series" url={window.base + '/material/api/newTestSeries/'} success_url="#" />,
 		el
 	);
 }
@@ -30,57 +26,66 @@ function TestResponses(pk) {
 	ReactDOM.render(<OverlayTestResponses pk={pk} />, el);
 }
 
-function deleteTest(pk, test, delMethod) {
+function deleteTest(pk, testSeries, delMethod) {
 	//Delete a test
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
 	ReactDOM.render(
 		<OverlayDeleteTest
-			title="Test Delete Form"
-			data={test}
-			url={window.base + '/material/api/test/deleteTest/' + pk + '/'}
+			title="Test Series Delete Form"
+			data={testSeries}
+			url={window.base + '/material/api/testS/deleteTestSeries/' + pk + '/'}
 			delete={delMethod}
 		/>,
 		el
 	);
 }
 
+function accessType(data) {
+	//To determine the material icon accordingto teh access type
+	let res = '';
+	switch (data) {
+		case 0:
+			res = 'public';
+			break;
+		case 1:
+			res = 'lock';
+			break;
+		case 2:
+			res = 'payments';
+			break;
+	}
+	return res;
+}
+
 function Tests(props) {
 	const [ active, updateActive ] = useState(-1);
-	let tests;
-	tests = props.tests.tests.map((data, index) => {
+	let testSeries;
+	testSeries = props.testSeries.testSeries.map((data, index) => {
 		let is_active = index === active ? styles.active : ''; //style if active from use state is == index of data
-
 		return (
-			<button
+			<div
 				onClick={() => updateActive(index)}
 				key={index}
 				className={[ 'btn form-control mb-1 text-left', styles.testBtns, is_active ].join(' ')}
 				style={{ backgroundColor: is_active === '' ? '' : 'rgba(0, 175, 59, 0.8)' }}
 			>
 				{data.fields.title}
+				<span className="float-right material-icons">{accessType(data.fields.access)}</span>
 				{is_active !== '' ? (
 					<div className="text-right">
-						<button
-							className={[ 'float-left', styles.assBtn ].join(' ')}
-							onClick={(ev) => TestResponses(data.pk)}
-						>
+						<button className={[ 'float-left', styles.assBtn ].join(' ')}>
 							<i className="material-icons">assignment</i>
 							<span className="ml-2">{data.attempts}</span>
 						</button>
 
-						<a
-							href={window.base + '/material/create-test/' + data.pk} //Link to create test
-							className={[ 'material-icons btn p-1', styles.editBtn ].join(' ')}
-						>
-							edit
-						</a>
+						<button className={[ 'material-icons btn p-1', styles.editBtn ].join(' ')}>edit</button>
 						<button
 							className={[ 'material-icons btn p-1', styles.deleteBtn ].join(' ')}
 							onClick={(ev) =>
 								deleteTest(data.pk, data.fields.title, () => {
 									//pasing a function to run when delete is successfull
-									props.deleteTest(index);
+									props.deleteTestSeries(index);
 									updateActive(-1);
 								})}
 						>
@@ -90,36 +95,36 @@ function Tests(props) {
 				) : (
 					''
 				)}
-			</button>
+			</div>
 		);
 	});
 
 	return (
 		<React.Fragment>
 			<h1 className={[ 'pl-4 text-dark mt-4 ml-4', styles.heading ].join(' ')}>
-				Tests
+				Test Series
 				<button
-					onClick={newTest}
+					onClick={newTestSeries}
 					className={[ 'material-icons m-2 p-0 text-success mr-4 pr-4', styles.addBtn ].join(' ')}
 				>
 					add
 				</button>
 			</h1>
 			<hr className="ml-3" />
-			<div className={[ 'ml-2 pr-2 form-control', styles.testsCont ].join(' ')}>{tests}</div>
+			<div className={[ 'ml-2 pr-2 form-control', styles.testsCont ].join(' ')}>{testSeries}</div>
 		</React.Fragment>
 	);
 }
 
 const mapStateToProps = (state) => {
 	return {
-		tests: state.Tests
+		testSeries: state.TestSeries
 	};
 };
 
 const mapDispatchFromProps = (dispatch) => {
 	return {
-		deleteTest: (index) => dispatch(dt(index))
+		deleteTestSeries: (index) => dispatch(dt(index))
 	};
 };
 

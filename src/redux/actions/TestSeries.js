@@ -5,7 +5,7 @@ export function updateMaterial(data) {
 	};
 }
 
-export function deleteTest(index) {
+export function deleteTestSeries(index) {
 	console.log('delete called');
 	return {
 		type: 'deleteTest',

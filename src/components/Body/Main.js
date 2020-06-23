@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import styles from './css/Main.module.css';
-import Tests from './Tests.js';
+import TestSeries from './TestSeries.js';
 
 import { connect } from 'react-redux';
-import { updateMaterial } from '../../redux/actions/Tests.js';
+import { updateMaterial } from '../../redux/actions/TestSeries.js';
 
 class Main extends Component {
 	//Fetching Dashboard data
 	componentDidMount = () => {
-		fetch(window.base + '/material/api/instructor-portal/test/', { credentials: window.cred })
+		fetch(window.base + '/material/api/instructor-portal/testSeries/', { credentials: window.cred })
 			.then((response) => response.json())
 			.then((data) => this.props.updateMaterial(data))
 			.catch((error) => alert(error));
@@ -17,7 +17,7 @@ class Main extends Component {
 	render() {
 		return (
 			<div id={styles.main}>
-				<Tests />
+				<TestSeries />
 			</div>
 		);
 	}
