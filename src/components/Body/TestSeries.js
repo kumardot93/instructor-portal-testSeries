@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import styles from './css/Tests.module.css';
 import OverlayForm from './OverlayForm.js';
 import OverlayDeleteTest from './OverlayDeleteForm.js';
-import OverlayTestResponses from './OverlayTestResults.js';
 
 import { connect } from 'react-redux';
 import { deleteTestSeries as dt } from '../../redux/actions/TestSeries.js';
@@ -19,14 +18,7 @@ function newTestSeries(event) {
 	);
 }
 
-function TestResponses(pk) {
-	//List of response on a test
-	let el = document.getElementById('overlay');
-	el.style.display = 'block';
-	ReactDOM.render(<OverlayTestResponses pk={pk} />, el);
-}
-
-function deleteTest(pk, testSeries, delMethod) {
+function deleteTestSeries(pk, testSeries, delMethod) {
 	//Delete a test
 	let el = document.getElementById('overlay');
 	el.style.display = 'block';
@@ -83,7 +75,7 @@ function Tests(props) {
 						<button
 							className={[ 'material-icons btn p-1', styles.deleteBtn ].join(' ')}
 							onClick={(ev) =>
-								deleteTest(data.pk, data.fields.title, () => {
+								deleteTestSeries(data.pk, data.fields.title, () => {
 									//pasing a function to run when delete is successfull
 									props.deleteTestSeries(index);
 									updateActive(-1);
