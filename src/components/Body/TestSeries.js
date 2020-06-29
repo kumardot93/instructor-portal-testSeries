@@ -71,7 +71,12 @@ function Tests(props) {
 							<span className="ml-2">{data.attempts}</span>
 						</button>
 
-						<button className={[ 'material-icons btn p-1', styles.editBtn ].join(' ')}>edit</button>
+						<a
+							className={[ 'material-icons btn p-1', styles.editBtn ].join(' ')}
+							href={window.base + '/material/create-test-series/' + data.pk}
+						>
+							edit
+						</a>
 						<button
 							className={[ 'material-icons btn p-1', styles.deleteBtn ].join(' ')}
 							onClick={(ev) =>
